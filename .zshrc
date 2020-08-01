@@ -106,3 +106,8 @@ if [ -f '/Users/chongcheeyuan/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/c
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/chongcheeyuan/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/chongcheeyuan/google-cloud-sdk/completion.zsh.inc'; fi
+
+bright() {
+    ddcutil setvcp 10 "$1"
+}
+
