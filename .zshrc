@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/chongcheeyuan/.oh-my-zsh"
+export ZSH="/Users/yuan/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -33,7 +33,7 @@ ZSH_THEME="robbyrussell"
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -70,11 +70,12 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
+# HOTFIX https://github.com/ohmyzsh/ohmyzsh/issues/6835#issuecomment-390216875
+ZSH_DISABLE_COMPFIX=true
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export JAVA_TOOL_OPTIONS="-Dapple.awt.UIElement=true"
-export HISTSIZE=999999999
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -100,14 +101,41 @@ export HISTSIZE=999999999
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/chongcheeyuan/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/chongcheeyuan/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/chongcheeyuan/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/chongcheeyuan/google-cloud-sdk/completion.zsh.inc'; fi
-
 bright() {
     ddcutil setvcp 10 "$1"
 }
 
+export JAVA_TOOL_OPTIONS="-Dapple.awt.UIElement=true"
+
+alias convert='for file in *.mov; do ffmpeg -i "$file" -vf "fps=30,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 "${file%.mov}".gif; done'
+alias downloadFiles='cd /Volumes/Samsung_T5/school/y3s2/fluminus_cli && mix fluminus --download-to=/Volumes/Samsung_T5/school/y3s2 --verbose --multimedia --webcasts --external-multimedia'
+# eval "$(docker-machine env default)"
+
+export MKL_DEBUG_CPU_TYPE=5 # https://www.agner.org/forum/viewtopic.php?f=1&t=6 otherwise numpy make make MLK_CPU_TYPE error
+
+[ -f "/Users/yuan/.ghcup/env" ] && source "/Users/yuan/.ghcup/env" # ghcup-env
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/yuan/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/yuan/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/yuan/opt/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/yuan/opt/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+export PATH="/Users/yuan/.local/bin:$PATH"
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/yuan/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/yuan/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/yuan/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/yuan/google-cloud-sdk/completion.zsh.inc'; fi
